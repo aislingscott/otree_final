@@ -1,0 +1,57 @@
+
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+      Confirm Understanding of Percentages
+{% endblock %}
+
+{% block styles %}
+<style>
+div.input-inline input {
+    display: inline;
+
+}
+
+li {
+    margin-bottom: 30px;
+
+}
+
+</style>
+
+{% endblock styles %}
+
+{% block content %}
+<div class="row lead">
+    <p class="text-info">Let’s test your understanding. Kindly answer the following quiz questions.</p>
+
+    <ul style="list-style-type: none">
+        <li>
+            <label>Q1: </label> {{form.tunderstanding_percentage_1.label}}
+            {{form.tunderstanding_percentage_1}}
+        </li>
+        <li>
+            <label>Q2: </label> {{form.tunderstanding_percentage_2.label}}
+            {{form.tunderstanding_percentage_2}}
+        </li>
+        <li>
+            <label>Q3: </label> {{form.tunderstanding_percentage_3.label}}
+            {{form.tunderstanding_percentage_3}}
+        </li>
+    </ul>
+</div>
+
+<hr>
+<div class="row lead">
+    <div class="col-md-12">
+        {% next_button %}
+    </div>
+</div>
+
+{% include "trust/includes/auto_trust_score.html" %}
+
+{% endblock %}
+
+
+

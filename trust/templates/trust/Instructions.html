@@ -1,0 +1,44 @@
+
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Game
+{% endblock %}
+
+{% block content %}
+<div class="row lead">
+    <p>
+        Now you will play some rounds of the game. You will be randomly
+        assigned to Player A or Player B. You will play both sequentially and
+        simultaneously.</p>
+    <p>
+        <strong>Sequential Play:</strong> When you play sequentially Player A
+        will decide then Player B sees Player A’s decision and makes their decision
+        on how much to return. Then both participants learn of their payoffs.</p>
+    <p>
+        <strong>Simultaneous Play:</strong> When you play simultaneously
+        Player A will decide. While Player A is deciding Player B will
+        simultaneously decide what percentage to return to Player A. Then both
+        participants learn of their payoffs.</p>
+    <p>
+        A random round will be selected to be your payment round. At the end of the experiment you'll get your payoff amount from that round.
+        You can only send whole dollars back and forth,
+        there is no splitting of dollars except Player B in the Simultaneous game.</p>
+    <p>
+        <strong class="text-info">Notes on pairings:</strong> All pairings are anonymous and you will
+        play with many different people. You are re-matched with a new person
+        each round.
+
+</div>
+
+<hr>
+<div class="row lead">
+    <div class="col-md-12">
+        {% next_button %}
+    </div>
+</div>
+
+{% include "trust/includes/auto_trust_score.html" %}
+
+{% endblock %}

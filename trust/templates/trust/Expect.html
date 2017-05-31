@@ -1,0 +1,106 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+    You are Player A. What are your expectations?
+{% endblock %}
+
+
+{% block styles %}
+<style>
+.glyphicon-star.half {
+  position: relative;
+}
+.glyphicon-star.half:before {
+  position: relative;
+  z-index: 9;
+  width: 47%;
+  display: block;
+  overflow: hidden;
+}
+.glyphicon-star.half:after {
+  content: '\e006';
+  position: absolute;
+  z-index: 8;
+  color: #ffffff;
+  top: 0;
+  left: 0;
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
+{% include "trust/includes/round_play_type.html" %}
+<div id="first-div">
+    <div class="row lead">
+        <div class="col-md-12">
+            {% formfield player.expect_other_player_to_return %}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="pull-right">
+                {% if subsession.reveal_variation == "reveal" %}
+                <button class="btn btn-primary btn-large btn-primary next-button" id="first">Next</button>
+                {% else %}
+                {% next_button %}
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+
+{% if subsession.reveal_variation == "reveal" %}
+<div id="second-div" style="display: none;">
+    <div class="row lead">
+        <p>
+            The <strong>Player B</strong> is:
+            {% include "trust/includes/returner_trustworthy.html" %}
+        </p>
+        <p class="well">
+            Their score is based on their answers to the survey
+            about pro-­sociality--- behavior that benefits other people or
+            society as a whole. You all took the same survey at the
+            beginning of the experiment.
+        </p>
+
+
+        <div class="col-md-12">
+            {% formfield player.expect_other_player_to_return_revealed %}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="pull-right">{% next_button %}</span>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% include "trust/includes/auto_trust_score.html" %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+{% if subsession.reveal_variation == "reveal" %}
+$(document).ready(function(){
+    $("#first").click(function(){
+        $("#first-div").hide("fast");
+        $("#second-div").show("fast");
+        return false;
+    });
+
+});
+{% endif %}
+</script>
+{% endblock %}
+
+
+
+

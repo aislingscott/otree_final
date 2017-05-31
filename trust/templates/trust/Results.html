@@ -1,0 +1,45 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+{% include "trust/includes/round_play_type.html" %}
+
+<div class="row lead">
+    <div class="col-md-12">
+        <ul>
+            <li>
+                Player <strong>A</strong>
+                give to player <strong>B</strong> <strong class="text-info">{{group.ammount_given|c}}</strong>
+            </li>
+            <li>
+                Player <strong>B</strong> receives <strong class="text-warning">{{return_max|c}}</strong>
+                (<code>{{group.ammount_given}} * 3</code>)
+            </li>
+            <li>
+                Finally the Player <strong>B</strong> return <strong class="text-success">{{group.ammount_sent_back|c}}</strong>
+            </li>
+            <li>
+                <strong>
+                    Thus <span class="text-info">Player A has {{group.sender_payoff|c}}</span> and
+                         <span class="text-success">Player B has {{group.returner_payoff|c}}</span>.
+                </strong>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row lead">
+    <div class="col-md-12">
+        {% next_button %}
+    </div>
+</div>
+
+{% include "trust/includes/auto_trust_score.html" %}
+
+{% endblock %}
+
+
+

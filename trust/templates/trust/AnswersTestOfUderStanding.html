@@ -1,0 +1,55 @@
+
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Answers to Confirmation of Understanding.
+{% endblock %}
+
+{% block styles %}
+<style>
+div.input-inline input {
+    display: inline;
+
+}
+
+li {
+    margin-bottom: 30px;
+
+}
+
+
+</style>
+
+{% endblock styles %}
+
+{% block content %}
+<div class="row lead">
+    <p>Here we have included the answers so you can check your own answers to
+        make sure you fully understand the game.</p>
+
+    <ul style="list-style-type: none">
+        {% for question, answer, explanation in Constants.test_of_understanding %}
+        <li>
+            <label>Q{{forloop.counter}}: </label> {{question}}
+            <p class="text-danger"><strong>Anwer:</strong> {{answer}}</p>
+            <p class="text-info"><strong>Explanation:</strong> {{explanation}}</p>
+        </li>
+        {% endfor %}
+
+    </ul>
+</div>
+
+<hr>
+<div class="row lead">
+    <div class="col-md-12">
+        {% next_button %}
+    </div>
+</div>
+
+{% include "trust/includes/auto_trust_score.html" %}
+
+{% endblock %}
+
+
+

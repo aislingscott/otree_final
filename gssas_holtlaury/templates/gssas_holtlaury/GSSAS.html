@@ -1,0 +1,52 @@
+
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+    GSS Attitudinal Survey Questions
+{% endblock %}
+
+
+{% block styles %}
+<style>
+    li.field-container div.controls label {
+        font-weight: normal;
+        margin-bottom: 30px;
+
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    div.form-group {
+        display: inline;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <p>
+        Please read the following questions and answer to the best of your knowledge. If you feel confused or if the question needs more explanations, please raise your hand and someone will answer your questions.
+        </p>
+        <ul>
+            {% for field in form %}
+            <li class="field-container"><strong class="text-info">Q.</strong> {% formfield field %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        <span class="pull-right">{% next_button %}</span>
+    </div>
+</div>
+
+{% endblock %}

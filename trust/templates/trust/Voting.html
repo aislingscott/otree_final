@@ -1,0 +1,90 @@
+
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Selecting Game Scenario
+{% endblock %}
+
+
+{% block styles %}
+<style>
+    th, td, table, tr {
+        border: 0px !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if subsession.reveal_variation == "reveal" %}
+<div class="row text-center lead">
+    <div class="col-md-12  well well-alt">
+        <p>
+            Your partner is
+            <span class="{% if not player_trustworthy %}text-success{% else %}text-warning {% endif %}">
+                {{partner.score}}
+            </span>
+            and you are
+            <span class="{% if player_trustworthy %}text-success{% else %}text-warning {% endif %}">
+                {{player.score}}
+            </span>
+        </p>
+    </div>
+</div>
+{% endif %}
+<div class="row lead">
+    <div class="col-md-12">
+        <p>
+            Please rank your preference for the scenario you would like to
+            play from first choice thru fourth choice. The computer will
+            randomly select your first choice or your partner’s first choice
+            to be played. However, with 8%, probability your first choice
+            will be thrown out and the computer will randomly pick your
+            second choice or your partner’s second choice. Consequently,
+            please make your ranking reflect your top choices
+        </p>
+        <p>
+            Then you and your partner will play whichever choice is selected
+            and move on to the next round.
+        </p>
+        <table id="votes" class="table table-hover">
+            {{form.as_table}}
+        </table>
+    </div>
+</div>
+
+<hr>
+<div class="row lead">
+    <div class="col-md-12">
+        {% next_button %}
+    </div>
+</div>
+
+{% include "trust/includes/auto_trust_score.html" %}
+
+{% endblock %}
+
+
+
+{% block scripts %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#votes select").change(function(evt){
+        var $current = $(evt.currentTarget);
+        var currentId = $current.attr("id");
+        var currentVal = $current.val();
+        if(!!currentVal){
+            $("#votes select").not(evt.currentTarget).each(function(idx, elem){
+                var $select = $(elem);
+                var selectVal = $select.val();
+                if(currentVal == selectVal)
+                    $select.val($select.find("option:first").val());
+            });
+        }
+    });
+});
+</script>
+{% endblock %}
+
+
+
